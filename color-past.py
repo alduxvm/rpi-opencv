@@ -41,7 +41,8 @@ class ColorTracker:
 
             #determine the objects moments and check that the area is large  
             #enough to be our object 
-            moments = cv.Moments(thresholded_img, 0)
+            mat=cv.GetMat(thresholded_img)
+            moments = cv.Moments(mat, 0)
             area = cv.GetCentralMoment(moments, 0, 0)
 
             #there can be noise in the video so ignore objects with small areas 
@@ -50,6 +51,8 @@ class ColorTracker:
                 #we are tracking by dividing the 1, 0 and 0, 1 moments by the area 
                 x = cv.GetSpatialMoment(moments, 1, 0)/area
                 y = cv.GetSpatialMoment(moments, 0, 1)/area
+                x = int(round(x))
+                y = int(round(y))
 
                 print 'x: ' + str(x) + ' y: ' + str(y) + ' area: ' + str(area) 
 
