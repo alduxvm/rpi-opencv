@@ -62,4 +62,4 @@ Then pick one of the testing scripts and have fun!!
 
 ## Working on mac!!
 
-![mac-opencv-python](http://www.aldux.net/images/face-mac-opencv.JPG "mac face detection opencv python")
+![mac-opencv-python](http://www.aldux.net/images/face-mac-opencv.png "mac face detection opencv python")
