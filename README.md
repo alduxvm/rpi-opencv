@@ -1,6 +1,8 @@
 # rpi-opencv
 
-Test scripts for using openCV with python, all running on a raspberry pi.
+Test scripts for using openCV with python, all running on a raspberry pi. Also works on Mac running yosemite after installing opencv using brew and resolving all problems and warnings.
+
+![rpi-opencv-python-noir](http://www.aldux.net/images/face-rpi-opencv.JPG "rpi face detection opencv python with noir camera")
 
 ## What do you need?
 
@@ -51,3 +53,13 @@ sudo modprobe bcm2835-v4l2
 
 Then pick one of the testing scripts and have fun!! 
 
+> Important!! This code is not enterely mine, its copy-pasted from different codes found on the internet, I just made them easier to read and change and becuase I'm lazy and I prefer to code in my mac than in the rpi and github its a great way to put code inside the rpi ;)
+
+
+## Working on rpi!
+
+![ss-opencv-python](http://www.aldux.net/images/ss-rpi-usb.png "ss face detection opencv python usb")
+
+## Working on mac!!
+
+![mac-opencv-python](http://www.aldux.net/images/face-mac-opencv.JPG "mac face detection opencv python")

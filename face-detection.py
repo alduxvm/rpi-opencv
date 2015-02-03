@@ -83,7 +83,6 @@ if __name__ == '__main__':
             if not frame_copy:
                 frame_copy = cv.CreateImage((frame.width,frame.height),
                                             cv.IPL_DEPTH_8U, frame.nChannels)
-                                           cv.IPL_DEPTH_8U, frame.nChannels)
 
             if frame.origin == cv.IPL_ORIGIN_TL:
                 cv.Copy(frame, frame_copy)

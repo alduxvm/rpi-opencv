@@ -37,7 +37,7 @@ class ColorTracker:
             #both turples which is the hue range(120,140).  OpenCV uses 0-180 as  
             #a hue range for the HSV color model 
             thresholded_img =  cv.CreateImage(cv.GetSize(hsv_img), 8, 1)
-            cv.InRangeS(hsv_img, (0, 80, 80), (20, 255, 255), thresholded_img)
+            cv.InRangeS(hsv_img, (120, 80, 80), (140, 255, 255), thresholded_img)
 
             #determine the objects moments and check that the area is large  
             #enough to be our object 
