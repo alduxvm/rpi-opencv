@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""face-detection.py: Face detection using openCV."""
+"""color-tracking.py: Color (blue-purple) detection using openCV."""
 
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"
