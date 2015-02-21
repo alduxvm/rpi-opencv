@@ -32,7 +32,9 @@ def detect_and_draw(img):
     hsv_img = cv.CreateImage(cv.GetSize(img), 8, 3)
     cv.CvtColor(img, hsv_img, cv.CV_BGR2HSV)
     thresholded_img =  cv.CreateImage(cv.GetSize(hsv_img), 8, 1)
-    cv.InRangeS(hsv_img, (120, 80, 80), (140, 255, 255), thresholded_img)
+    #cv.InRangeS(hsv_img, (120, 80, 80), (140, 255, 255), thresholded_img)
+    sensitivity = 10
+    cv.InRangeS(hsv_img, (0, 0, 255-sensitivity), (255, sensitivity, 255), thresholded_img)
     mat=cv.GetMat(thresholded_img)
     moments = cv.Moments(mat, 0)
     area = cv.GetCentralMoment(moments, 0, 0)
@@ -42,7 +44,7 @@ def detect_and_draw(img):
 
     cv.EqualizeHist(small_img, small_img)
 
-    if(area > 100000):
+    if(area > 10000):
         #determine the x and y coordinates of the center of the object 
         #we are tracking by dividing the 1, 0 and 0, 1 moments by the area 
         x = cv.GetSpatialMoment(moments, 1, 0)/area
@@ -59,7 +61,7 @@ def detect_and_draw(img):
         cv.Add(img, overlay, img)
         #add the thresholded image back to the img so we can see what was  
         #left after it was applied 
-        cv.Merge(thresholded_img, None, None, None, img)
+        #cv.Merge(thresholded_img, None, None, None, img)
 
     t = cv.GetTickCount() - t
     print "detection time = %gms" % (t/(cv.GetTickFrequency()*1000.))
@@ -67,7 +69,8 @@ def detect_and_draw(img):
 
 if __name__ == '__main__':
 
-    capture = cv.CreateCameraCapture(0)
+    #capture = cv.CreateCameraCapture(0)
+    capture = cv.CaptureFromFile('crash-480.mp4')
 
     cv.NamedWindow("Color detection", 1)
 

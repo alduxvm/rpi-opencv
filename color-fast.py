@@ -18,9 +18,10 @@ import numpy as np
 class ColourTracker:
   def __init__(self):
     cv2.namedWindow("ColourTrackerWindow", cv2.CV_WINDOW_AUTOSIZE)
-    self.capture = cv2.VideoCapture(0)
-    self.capture.set(3,320)
-    self.capture.set(4,240)
+    #self.capture = cv2.VideoCapture(0)
+    self.capture = cv2.VideoCapture('crash-480.mp4')
+    #self.capture.set(3,320)
+    #self.capture.set(4,240)
     self.scale_down = 4
   def run(self):
     while True:
@@ -32,9 +33,12 @@ class ColourTracker:
       img = cv2.resize(img, (len(orig_img[0]) / self.scale_down, len(orig_img) / self.scale_down))
       #red_lower = np.array([0, 150, 0],np.uint8)
       #red_upper = np.array([5, 255, 255],np.uint8)
-      blue_lower = np.array([130, 80, 80],np.uint8)
-      blue_upper = np.array([140, 255, 255],np.uint8)
-      red_binary = cv2.inRange(img, blue_lower, blue_upper)
+      #blue_lower = np.array([130, 80, 80],np.uint8)
+      #blue_upper = np.array([140, 255, 255],np.uint8)
+      sensitivity = 15
+      lower_white = np.array([0,0,255-sensitivity])
+      upper_white = np.array([255,sensitivity,255])
+      red_binary = cv2.inRange(img, lower_white, upper_white)
       dilation = np.ones((15, 15), "uint8")
       red_binary = cv2.dilate(red_binary, dilation)
       contours, hierarchy = cv2.findContours(red_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
