@@ -44,7 +44,7 @@ def detect_and_draw(img):
 
     cv.EqualizeHist(small_img, small_img)
 
-    if(area > 10000):
+    if(area > 5000):
         #determine the x and y coordinates of the center of the object 
         #we are tracking by dividing the 1, 0 and 0, 1 moments by the area 
         x = cv.GetSpatialMoment(moments, 1, 0)/area
@@ -52,7 +52,7 @@ def detect_and_draw(img):
         x = int(round(x))
         y = int(round(y))
 
-        print 'x: ' + str(x) + ' y: ' + str(y) + ' area: ' + str(area) 
+        #print 'x: ' + str(x) + ' y: ' + str(y) + ' area: ' + str(area) 
 
         #create an overlay to mark the center of the tracked object 
         overlay = cv.CreateImage(cv.GetSize(img), 8, 3)
@@ -62,9 +62,13 @@ def detect_and_draw(img):
         #add the thresholded image back to the img so we can see what was  
         #left after it was applied 
         #cv.Merge(thresholded_img, None, None, None, img)
+        message = "Color tracked!"
+    else:
+        message = ""
 
     t = cv.GetTickCount() - t
-    print "detection time = %gms" % (t/(cv.GetTickFrequency()*1000.))
+    #print "detection time = %gms" % (t/(cv.GetTickFrequency()*1000.))
+    print "detection time = %gms %s" % (round((t/(cv.GetTickFrequency()*1000.)),1), message)
     cv.ShowImage("Color detection", img)
 
 if __name__ == '__main__':

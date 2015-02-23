@@ -18,8 +18,8 @@ import numpy as np
 class ColourTracker:
   def __init__(self):
     cv2.namedWindow("ColourTrackerWindow", cv2.CV_WINDOW_AUTOSIZE)
-    #self.capture = cv2.VideoCapture(0)
-    self.capture = cv2.VideoCapture('crash-480.mp4')
+    self.capture = cv2.VideoCapture(0)
+    #self.capture = cv2.VideoCapture('crash-480.mp4')
     #self.capture.set(3,320)
     #self.capture.set(4,240)
     self.scale_down = 4
@@ -49,7 +49,7 @@ class ColourTracker:
         if area > max_area:
           max_area = area
           largest_contour = contour
-      if not largest_contour == None:
+      if largest_contour is not None:
         moment = cv2.moments(largest_contour)
         if moment["m00"] > 1000 / self.scale_down:
           rect = cv2.minAreaRect(largest_contour)
@@ -57,13 +57,18 @@ class ColourTracker:
           box = cv2.cv.BoxPoints(rect)
           box = np.int0(box)
           cv2.drawContours(orig_img,[box], 0, (0, 0, 255), 2)
+          message = "Color tracked!"
           t = cv2.getTickCount() - t
-          print "detection time = %gms" % (t/(cv2.getTickFrequency()*1000.))
+          #print "detection time = %gms" % (t/(cv2.getTickFrequency()*1000.))
+          print "detection time = %gms %s" % ( (t/(cv2.getTickFrequency()*1000.)) , message)
           cv2.imshow("ColourTrackerWindow", orig_img)
           if cv2.waitKey(20) == 27:
             cv2.destroyWindow("ColourTrackerWindow")
             self.capture.release()
             break
+      else:
+        cv2.imshow("ColourTrackerWindow", orig_img)
+
 if __name__ == "__main__":
   colour_tracker = ColourTracker()
   colour_tracker.run()
