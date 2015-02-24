@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""color-tracking.py: Color (blue-purple or red) detection using openCV."""
+"""color-fast.py: Color (white HSV range) detection using openCV."""
 
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"
@@ -14,6 +14,7 @@ __status__ = "Development"
 
 import cv2, math
 import numpy as np
+import time
 
 class ColourTracker:
   def __init__(self):
@@ -25,7 +26,8 @@ class ColourTracker:
     self.scale_down = 4
   def run(self):
     while True:
-      t = cv2.getTickCount()
+      t1 = time.time()
+
       f, orig_img = self.capture.read()
       orig_img = cv2.flip(orig_img, 1)
       img = cv2.GaussianBlur(orig_img, (5,5), 0)
@@ -58,10 +60,12 @@ class ColourTracker:
           box = np.int0(box)
           cv2.drawContours(orig_img,[box], 0, (0, 0, 255), 2)
           message = "Color tracked!"
-          t = cv2.getTickCount() - t
+
+          t2 = time.time()
           #print "detection time = %gms" % (t/(cv2.getTickFrequency()*1000.))
-          print "detection time = %gms %s" % ( (t/(cv2.getTickFrequency()*1000.)) , message)
+          print "detection time = %gs %s" % ( round(t2-t1,3) , message)
           cv2.imshow("ColourTrackerWindow", orig_img)
+          
           if cv2.waitKey(20) == 27:
             cv2.destroyWindow("ColourTrackerWindow")
             self.capture.release()

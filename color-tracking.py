@@ -13,16 +13,18 @@ __status__ = "Development"
 
 import sys
 import cv
+import time 
 
 min_size = (20, 20)
-image_scale = 2
+image_scale = 4
 haar_scale = 1.2
 min_neighbors = 2
 haar_flags = 0
 
 def detect_and_draw(img):
+    t1 = time.time()
+
     # allocate temporary images
-    t = cv.GetTickCount()
     gray = cv.CreateImage((img.width,img.height), 8, 1)
     small_img = cv.CreateImage((cv.Round(img.width / image_scale),
 			       cv.Round (img.height / image_scale)), 8, 1)
@@ -33,7 +35,7 @@ def detect_and_draw(img):
     cv.CvtColor(img, hsv_img, cv.CV_BGR2HSV)
     thresholded_img =  cv.CreateImage(cv.GetSize(hsv_img), 8, 1)
     #cv.InRangeS(hsv_img, (120, 80, 80), (140, 255, 255), thresholded_img)
-    sensitivity = 10
+    sensitivity = 15
     cv.InRangeS(hsv_img, (0, 0, 255-sensitivity), (255, sensitivity, 255), thresholded_img)
     mat=cv.GetMat(thresholded_img)
     moments = cv.Moments(mat, 0)
@@ -66,20 +68,19 @@ def detect_and_draw(img):
     else:
         message = ""
 
-    t = cv.GetTickCount() - t
-    #print "detection time = %gms" % (t/(cv.GetTickFrequency()*1000.))
-    print "detection time = %gms %s" % (round((t/(cv.GetTickFrequency()*1000.)),1), message)
+    t2 = time.time()
+    print "detection time = %gs %s" % ( round(t2-t1,3) , message)
     cv.ShowImage("Color detection", img)
 
 if __name__ == '__main__':
 
-    #capture = cv.CreateCameraCapture(0)
-    capture = cv.CaptureFromFile('crash-480.mp4')
+    capture = cv.CreateCameraCapture(0)
+    #capture = cv.CaptureFromFile('crash-480.mp4')
 
     cv.NamedWindow("Color detection", 1)
 
-    width = 320 #leave None for auto-detection
-    height = 240 #leave None for auto-detection
+    width = None #leave None for auto-detection
+    height = None #leave None for auto-detection
 
     if width is None:
     	width = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH))
