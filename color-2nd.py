@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-"""color-tracking.py: Color (blue-purple) detection using openCV."""
+"""color-2nd.py: Color (blue-purple) detection using openCV."""
+
+""" Performance: on video (mp4 sample) and running in a RMBP -> 0.012s each detection or 83hz """
 
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"
@@ -74,8 +76,8 @@ def detect_and_draw(img):
 
 if __name__ == '__main__':
 
-    capture = cv.CreateCameraCapture(0)
-    #capture = cv.CaptureFromFile('crash-480.mp4')
+    #capture = cv.CreateCameraCapture(0)
+    capture = cv.CaptureFromFile('crash-480.mp4')
 
     cv.NamedWindow("Color detection", 1)
 

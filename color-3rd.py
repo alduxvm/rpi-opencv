@@ -2,6 +2,8 @@
 
 """color-fast.py: Color (white HSV range) detection using openCV."""
 
+""" Performance: on video (mp4 sample) and running in a RMBP -> 0.014s each detection or 71hz """
+
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"
 
@@ -19,8 +21,8 @@ import time
 class ColourTracker:
   def __init__(self):
     cv2.namedWindow("ColourTrackerWindow", cv2.CV_WINDOW_AUTOSIZE)
-    self.capture = cv2.VideoCapture(0)
-    #self.capture = cv2.VideoCapture('crash-480.mp4')
+    #self.capture = cv2.VideoCapture(0)
+    self.capture = cv2.VideoCapture('crash-480.mp4')
     #self.capture.set(3,320)
     #self.capture.set(4,240)
     self.scale_down = 4

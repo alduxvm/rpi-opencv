@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-"""color-tracking.py: Color tracking using openCV. (past version)"""
+"""color-1st.py: Color tracking using openCV. """
+
+""" Performance: on video (mp4 sample) and running in a RMBP -> 0.005s each detection or 200hz """
 
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"
@@ -10,7 +12,7 @@ __version__ = "1"
 __maintainer__ = "Aldo Vargas"
 __email__ = "alduxvm@gmail.com"
 __status__ = "Development"
-import cv
+import cv, time
 
 color_tracker_window = "Color Tracker"
 
@@ -24,7 +26,8 @@ class ColorTracker:
     def run(self):
         while True:
             img = cv.QueryFrame( self.capture )
-            t = cv.GetTickCount()
+            #t = cv.GetTickCount()
+            t = time.time()
             #blur the source image to reduce color noise 
             cv.Smooth(img, img, cv.CV_BLUR, 3);
 
@@ -70,8 +73,8 @@ class ColorTracker:
             else:
                 message = ""
 
-            t = cv.GetTickCount() - t
-            print "detection time = ", round((t/(cv.GetTickFrequency()*1000.)),1), message
+            t = time.time() - t
+            print "detection time = %gs %s" % ( round(t,3) , message)
             #display the image  
             cv.ShowImage(color_tracker_window, img)
 
