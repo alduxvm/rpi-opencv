@@ -21,10 +21,10 @@ import time
 class ColourTracker:
   def __init__(self):
     cv2.namedWindow("ColourTrackerWindow", cv2.CV_WINDOW_AUTOSIZE)
-    #self.capture = cv2.VideoCapture(0)
-    self.capture = cv2.VideoCapture('crash-480.mp4')
-    #self.capture.set(3,320)
-    #self.capture.set(4,240)
+    self.capture = cv2.VideoCapture(0)
+    #self.capture = cv2.VideoCapture('crash-480.mp4')
+    self.capture.set(3,320)
+    self.capture.set(4,240)
     self.scale_down = 4
   def run(self):
     while True:

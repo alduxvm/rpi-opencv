@@ -19,22 +19,24 @@ import cv2
 import time
 
 
-#cam = cv2.VideoCapture(0)
-cam = cv2.VideoCapture('crash-480.mp4')
+cam = cv2.VideoCapture(0)
+#cam = cv2.VideoCapture('crash-480.mp4')
+cam.set(3,640)
+cam.set(4,480)
 
 while ( True ):
         t1 = time.time()
         ret, frame = cam.read()
 
         hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
-        blue=cv2.inRange(hsv,np.array([100,50,50]),np.array([140,255,255]))
-        green=cv2.inRange(hsv,np.array([40,50,50]),np.array([80,255,255]))
+        #blue=cv2.inRange(hsv,np.array([100,50,50]),np.array([140,255,255]))
+        #green=cv2.inRange(hsv,np.array([40,50,50]),np.array([80,255,255]))
         red = cv2.inRange(hsv,np.array([0,150,0]),np.array([5,255,255]))
-        sensitivity = 10
-        white = cv2.inRange(hsv,np.array([0,0,255-sensitivity]),np.array([255,sensitivity,255]))
+        #sensitivity = 10
+        #white = cv2.inRange(hsv,np.array([0,0,255-sensitivity]),np.array([255,sensitivity,255]))
 
         # Change to select color
-        image_mask=green
+        image_mask=red
 
         element = cv2.getStructuringElement(cv2.MORPH_RECT,(3,3))
         image_mask = cv2.erode(image_mask,element, iterations=2)
