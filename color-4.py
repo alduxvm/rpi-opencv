@@ -2,7 +2,7 @@
 
 """color-new.py: Color ( HSV range) detection using openCV."""
 
-""" Performance: on video (mp4 sample) and running in a RMBP -> 0.02s each detection or 50hz """
+""" Performance: on video (mp4 sample) and running in a RMBP -> 0.005s each detection or 20hz """
 
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"
@@ -29,14 +29,21 @@ while ( True ):
         ret, frame = cam.read()
 
         hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
-        #blue=cv2.inRange(hsv,np.array([100,50,50]),np.array([140,255,255]))
-        #green=cv2.inRange(hsv,np.array([40,50,50]),np.array([80,255,255]))
-        red = cv2.inRange(hsv,np.array([0,150,0]),np.array([5,255,255]))
+        # Blue
+        #color = cv2.inRange(hsv,np.array([100,50,50]),np.array([140,255,255]))
+
+        # Green
+        #color = cv2.inRange(hsv,np.array([40,50,50]),np.array([80,255,255]))
+
+        # Red
+        color = cv2.inRange(hsv,np.array([0,150,0]),np.array([5,255,255]))
+
+        # White
         #sensitivity = 10
-        #white = cv2.inRange(hsv,np.array([0,0,255-sensitivity]),np.array([255,sensitivity,255]))
+        #color = cv2.inRange(hsv,np.array([0,0,255-sensitivity]),np.array([255,sensitivity,255]))
 
         # Change to select color
-        image_mask=red
+        image_mask=color
 
         element = cv2.getStructuringElement(cv2.MORPH_RECT,(3,3))
         image_mask = cv2.erode(image_mask,element, iterations=2)
@@ -58,7 +65,6 @@ while ( True ):
             t2 = time.time()
             print "detection time = %gs x=%d,y=%d" % ( round(t2-t1,3) , x, y)
 
-        
         #output=cv2.bitwise_and(frame,frame,mask=image_mask)
         cv2.imshow('Original',frame)
         #cv2.imshow('Image Mask',image_mask)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""color-1st.py: Color tracking using openCV. """
+"""color-1.py: Color tracking using openCV. """
 
 """ Performance: on video (mp4 sample) and running in a RMBP -> 0.005s each detection or 200hz """
 
@@ -20,14 +20,17 @@ class ColorTracker:
 
     def __init__(self):
         cv.NamedWindow( color_tracker_window, 1 )
-        #self.capture = cv.CaptureFromCAM(0)
-        self.capture = cv.CaptureFromFile('crash-480.mp4')
+        self.capture = cv.CaptureFromCAM(0)
+        width = 640
+        height = 480
+        cv.SetCaptureProperty(self.capture,cv.CV_CAP_PROP_FRAME_WIDTH,width)
+        cv.SetCaptureProperty(self.capture,cv.CV_CAP_PROP_FRAME_HEIGHT,height)
+        #self.capture = cv.CaptureFromFile('crash-480.mp4')
 
     def run(self):
         while True:
             img = cv.QueryFrame( self.capture )
-            #t = cv.GetTickCount()
-            t = time.time()
+            t1 = time.time()
             #blur the source image to reduce color noise 
             cv.Smooth(img, img, cv.CV_BLUR, 3);
 
@@ -41,8 +44,19 @@ class ColorTracker:
             #both turples which is the hue range(120,140).  OpenCV uses 0-180 as  
             #a hue range for the HSV color model 
             thresholded_img =  cv.CreateImage(cv.GetSize(hsv_img), 8, 1)
-            sensitivity = 10
-            cv.InRangeS(hsv_img, (0, 0, 255-sensitivity), (255, sensitivity, 255), thresholded_img)
+
+            # White
+            #sensitivity = 10
+            #cv.InRangeS(hsv_img, (0, 0, 255-sensitivity), (255, sensitivity, 255), thresholded_img)
+
+            # Red
+            cv.InRangeS(hsv_img, (0, 150, 0), (5, 255, 255), thresholded_img)
+
+            # Blue
+            #cv.InRangeS(hsv_img, (100, 50, 50), (140, 255, 255), thresholded_img)
+
+            # Green
+            #cv.InRangeS(hsv_img, (40, 50, 50), (80, 255, 255), thresholded_img)
 
             #determine the objects moments and check that the area is large  
             #enough to be our object 
@@ -59,22 +73,16 @@ class ColorTracker:
                 x = int(round(x))
                 y = int(round(y))
 
-                #print 'x: ' + str(x) + ' y: ' + str(y) + ' area: ' + str(area) 
-
                 #create an overlay to mark the center of the tracked object 
                 overlay = cv.CreateImage(cv.GetSize(img), 8, 3)
-
                 cv.Circle(overlay, (x, y), 2, (255, 255, 255), 20)
                 cv.Add(img, overlay, img)
                 #add the thresholded image back to the img so we can see what was  
                 #left after it was applied 
+                t2 = time.time()
                 cv.Merge(thresholded_img, None, None, None, img)
-                message = "color tracked!"
-            else:
-                message = ""
-
-            t = time.time() - t
-            print "detection time = %gs %s" % ( round(t,3) , message)
+                print "detection time = %gs x=%d,y=%d" % ( round(t2-t1,3) , x, y)
+            
             #display the image  
             cv.ShowImage(color_tracker_window, img)
 
