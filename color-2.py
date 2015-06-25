@@ -2,7 +2,16 @@
 
 """color-2.py: Color detection using openCV."""
 
-""" Performance: on video (mp4 sample) and running in a RMBP -> 0.006s  each detection or 166hz """
+""" 
+Performance: 
+
+RMBP -> 0.006s each detection or 166hz 
+
+RPI 2 -> 0.138s each detection or 7hz 
+
+RPI B+ -> 0.36 each detection or 2.7hz 
+
+"""
 
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"

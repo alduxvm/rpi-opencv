@@ -2,7 +2,16 @@
 
 """color-1.py: Color tracking using openCV. """
 
-""" Performance: on video (mp4 sample) and running in a RMBP -> 0.005s each detection or 200hz """
+""" 
+Performance: 
+
+RMBP -> 0.005s each detection or 200hz 
+
+RPI 2 -> 0.1 each detection or 10hz 
+
+RPI B+ -> 0.36 each detection or 2.7hz 
+
+"""
 
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"

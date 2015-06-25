@@ -1,8 +1,17 @@
 #!/usr/bin/env python
 
-"""color-3.py: Color (white HSV range) detection using openCV."""
+"""color-3.py: Color detection using openCV."""
 
-""" Performance: on video (mp4 sample) and running in a RMBP -> 0.03s each detection or 33hz """
+""" 
+Performance: 
+
+RMBP -> 0.03s each detection or 33hz 
+
+RPI2 -> 0.125s each detection or 8hz 
+
+RPI B+ -> 0.3 each detection or 3.33hz 
+
+"""
 
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"
