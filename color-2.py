@@ -48,11 +48,11 @@ def detect_and_draw(img):
     #cv.InRangeS(hsv_img, (120, 80, 80), (140, 255, 255), thresholded_img)
 
     # White
-    #sensitivity = 15
-    #cv.InRangeS(hsv_img, (0, 0, 255-sensitivity), (255, sensitivity, 255), thresholded_img)
+    sensitivity = 15
+    cv.InRangeS(hsv_img, (0, 0, 255-sensitivity), (255, sensitivity, 255), thresholded_img)
 
     # Red
-    cv.InRangeS(hsv_img, (0, 150, 0), (5, 255, 255), thresholded_img)
+    #cv.InRangeS(hsv_img, (0, 150, 0), (5, 255, 255), thresholded_img)
 
     # Blue
     #cv.InRangeS(hsv_img, (100, 50, 50), (140, 255, 255), thresholded_img)
@@ -96,11 +96,12 @@ def detect_and_draw(img):
 if __name__ == '__main__':
 
     capture = cv.CreateCameraCapture(0)
-    #capture = cv.CaptureFromFile('crash-480.mp4')
+    #capture = cv.CaptureFromFile('roomba.mp4')
     cv.NamedWindow("Color detection", 1)
 
     width = 640 #leave None for auto-detection
     height = 480 #leave None for auto-detection
+
 
     if width is None:
     	width = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH))

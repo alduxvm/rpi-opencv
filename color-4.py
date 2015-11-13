@@ -29,7 +29,7 @@ import time
 
 
 cam = cv2.VideoCapture(0)
-#cam = cv2.VideoCapture('crash-480.mp4')
+#cam = cv2.VideoCapture('roomba.mp4')
 cam.set(3,640)
 cam.set(4,480)
 
@@ -45,11 +45,11 @@ while ( True ):
         #color = cv2.inRange(hsv,np.array([40,50,50]),np.array([80,255,255]))
 
         # Red
-        color = cv2.inRange(hsv,np.array([0,150,0]),np.array([5,255,255]))
+        #color = cv2.inRange(hsv,np.array([0,150,0]),np.array([5,255,255]))
 
         # White
-        #sensitivity = 10
-        #color = cv2.inRange(hsv,np.array([0,0,255-sensitivity]),np.array([255,sensitivity,255]))
+        sensitivity = 10
+        color = cv2.inRange(hsv,np.array([0,0,255-sensitivity]),np.array([255,sensitivity,255]))
 
         # Change to select color
         image_mask=color
