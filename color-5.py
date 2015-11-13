@@ -90,11 +90,11 @@ class vision:
 				print self.position				
 			if self.show:
 				cv2.imshow( 'vision' ,frame)
-			#if cv2.waitKey(1) == 27:
-			#	break
+			if cv2.waitKey(1) == 27:
+				break
 
 
-test = vision('red',True)
+test = vision('white',True)
 
 def aldo():
 	global test
@@ -104,16 +104,16 @@ def aldo():
 try:
 	#test = vision('red',True)
 	#test.findcolor()
-	aldo()
-	#testThread = threading.Thread(target=test.findcolor)
-	#testThread.daemon=True
-	#testThread.start()
-	#testThread.join()
-	#while True:
-	#	print test.position
-	#	if cv2.waitKey(1) == 27:
-	#		break
-	#	time.sleep(0.1)
-	#	pass
+	#aldo()
+	testThread = threading.Thread(target=test.findcolor)
+	testThread.daemon=True
+	testThread.start()
+	testThread.join()
+	while True:
+		print test.position
+		if cv2.waitKey(1) == 27:
+			break
+		time.sleep(0.1)
+		pass
 except Exception,error:
 	print "Error in main: "+str(error)
