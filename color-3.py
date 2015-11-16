@@ -32,6 +32,7 @@ class ColorTracker:
         cv2.namedWindow("ColorTrackerWindow", cv2.CV_WINDOW_AUTOSIZE)
         self.capture = cv2.VideoCapture(0)
         #self.capture = cv2.VideoCapture('crash-480.mp4')
+        self.tracker = {'color':targetcolor,'found':False,'x':0.0,'y':0.0,'serx':0.0,'sery':0.0,'elapsed':0.0}
         self.targetcolor = targetcolor
         self.show = show
         self.width = width
@@ -39,7 +40,7 @@ class ColorTracker:
         self.capture.set(3,self.width)
         self.capture.set(4,self.height)
         self.scale_down = 4
-    def run(self):
+    def findColor(self):
         while True:
             t1 = time.time()
             f, orig_img = self.capture.read()
@@ -81,8 +82,15 @@ class ColorTracker:
                     cv2.drawContours(orig_img,[box], 0, (0, 0, 255), 2)
                     x = rect[0][0]
                     y = rect[0][1]
-                    t2 = time.time()
-                    print "detection time = %gs x=%d,y=%d" % ( round(t2-t1,3) , x, y)
+                    self.tracker['found']=True
+                    self.tracker['elapsed'] = round(time.time() - t1,3)
+                    self.tracker['x'] = round(x,3)
+                    self.tracker['y'] = round(y,3)
+                    #Check correct width with X and height with Y
+                    self.tracker['serx'] = round((self.tracker['x']-(self.width/2.0))*(50.0/(self.width/2)),3)
+                    self.tracker['sery'] = round((self.tracker['y']-(self.height/2.0))*(50.0/(self.height/2)),3)
+                    print self.tracker
+                    #print "detection time = %gs x=%d,y=%d" % ( round(t2-t1,3) , x, y)
                     cv2.imshow("ColorTrackerWindow", orig_img)   
                     if cv2.waitKey(20) == 27:
                         cv2.destroyWindow("ColorTrackerWindow")
@@ -90,18 +98,24 @@ class ColorTracker:
                         break
             else:
                 cv2.imshow("ColorTrackerWindow", orig_img)
+                self.tracker['found']=False
+                print self.tracker
 
 color_tracker = ColorTracker('white',True,640,480)
+color_tracker.findColor()
+
+"""
 try:
-    testThread = threading.Thread(target=color_tracker.run)
+    testThread = threading.Thread(target=color_tracker.findColor)
     testThread.daemon=True
     testThread.start()
     testThread.join()
     while True:
-        print test.position
+        print color_tracker.tracker
         if cv2.waitKey(1) == 27:
             break
         time.sleep(0.1)
         pass
 except Exception,error:
     print "Error in main: "+str(error)
+"""
