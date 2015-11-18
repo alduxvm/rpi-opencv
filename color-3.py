@@ -26,10 +26,10 @@ __status__ = "Development"
 import cv2, math
 import numpy as np
 import time, threading
+import multiprocessing
 
 class ColorTracker:
     def __init__(self, targetcolor, show, width, height):
-        cv2.namedWindow("ColorTrackerWindow", cv2.CV_WINDOW_AUTOSIZE)
         self.capture = cv2.VideoCapture(0)
         #self.capture = cv2.VideoCapture('crash-480.mp4')
         self.tracker = {'color':targetcolor,'found':False,'x':0.0,'y':0.0,'serx':0.0,'sery':0.0,'elapsed':0.0}
@@ -40,6 +40,8 @@ class ColorTracker:
         self.capture.set(3,self.width)
         self.capture.set(4,self.height)
         self.scale_down = 4
+        if self.show:
+            cv2.namedWindow("ColorTrackerWindow", cv2.CV_WINDOW_AUTOSIZE)
     def findColor(self):
         while True:
             t1 = time.time()
@@ -91,31 +93,38 @@ class ColorTracker:
                     self.tracker['sery'] = round((self.tracker['y']-(self.height/2.0))*(50.0/(self.height/2)),3)
                     print self.tracker
                     #print "detection time = %gs x=%d,y=%d" % ( round(t2-t1,3) , x, y)
-                    cv2.imshow("ColorTrackerWindow", orig_img)   
+                    if self.show:
+                        cv2.imshow("ColorTrackerWindow", orig_img)   
                     if cv2.waitKey(20) == 27:
-                        cv2.destroyWindow("ColorTrackerWindow")
+                        if self.show:
+                            cv2.destroyWindow("ColorTrackerWindow")
                         self.capture.release()
                         break
             else:
-                cv2.imshow("ColorTrackerWindow", orig_img)
+                if self.show:
+                    cv2.imshow("ColorTrackerWindow", orig_img)
                 self.tracker['found']=False
                 print self.tracker
 
-color_tracker = ColorTracker('white',True,640,480)
+color_tracker = ColorTracker('white',False,640,480)
 color_tracker.findColor()
+jobs = []
 
 """
 try:
-    testThread = threading.Thread(target=color_tracker.findColor)
-    testThread.daemon=True
-    testThread.start()
-    testThread.join()
-    while True:
-        print color_tracker.tracker
-        if cv2.waitKey(1) == 27:
-            break
-        time.sleep(0.1)
-        pass
+    #testThread = threading.Thread(target=color_tracker.findColor)
+    #testThread.daemon=True
+    #testThread.start()
+    #testThread.join()
+    p = multiprocessing.Process(target=color_tracker.findColor)
+    jobs.append(p)
+    p.start()
+    #while True:
+    #    print color_tracker.tracker
+    #    if cv2.waitKey(1) == 27:
+    #       break
+    #    time.sleep(0.1)
+    #    pass
 except Exception,error:
     print "Error in main: "+str(error)
 """
