@@ -1,12 +1,18 @@
+![Altax](https://altax.net/images/altax.png "Altax")
+
 # rpi-opencv
 
-Test scripts for using openCV with python, all running on a raspberry pi. Also works on Mac running yosemite after installing opencv using brew and resolving all problems and warnings.
+Test scripts for using openCV with python, all made to running on a raspberry pi, but will work on Mac's and Linux. 
 
-![rpi-opencv-python-noir](http://www.aldux.net/images/face-rpi-opencv.JPG "rpi face detection opencv python with noir camera")
+![rpi-opencv-python-noir](https://altax.net/images/face-rpi-opencv.jpg "rpi face detection opencv python with noir camera")
+
+## Video demo:
+
+[![Drone Color tracking](http://img.youtube.com/vi/xlQw_mnJtNQ/0.jpg)](http://www.youtube.com/watch?v=xlQw_mnJtNQ)
 
 ## What do you need?
 
-* Raspberry pi (I'm using a rpi B+)
+* Raspberry pi (I'm using a rpi B+, rpi2)
 * Camera module (I'm using the NOIR camera)
 * USB webcam (I'm using a logitech pro 9000)
 * wifi dongle for the rpi or ethernet (duhhh)
@@ -36,7 +42,7 @@ If you can see video, then everything is ok, we can proceed to check the other c
 ```
 sudo raspi-config
 ```
--- You may have to reboot your rpi if it wasnt enabled.
+-- You may have to reboot your rpi if it wasn't enabled.
 
 Test this module using this command:
 ```
@@ -53,13 +59,13 @@ sudo modprobe bcm2835-v4l2
 
 Then pick one of the testing scripts and have fun!! 
 
-> Important!! This code is not enterely mine, its copy-pasted from different codes found on the internet, I just made them easier to read and change and becuase I'm lazy and I prefer to code in my mac than in the rpi and github its a great way to put code inside the rpi ;)
+> Important!! This code is not enterely mine, its copy-pasted from different codes found on the internet, I just made them easier to read and change and because I'm lazy and I prefer to code in my mac than in the rpi and github its a great way to put code inside the rpi ;)
 
 
 ## Working on rpi!
 
-![ss-opencv-python](http://www.aldux.net/images/ss-rpi-usb.png "ss face detection opencv python usb")
+![ss-opencv-python](https://altax.net/images/ss-rpi-usb.png "ss face detection opencv python usb")
 
 ## Working on mac!!
 
-![mac-opencv-python](http://www.aldux.net/images/face-mac-opencv.png "mac face detection opencv python")
+![mac-opencv-python](https://altax.net/images/face-mac-opencv.png "mac face detection opencv python")
