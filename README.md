@@ -14,10 +14,12 @@ Test scripts for using openCV with python, all made to running on a raspberry pi
 
 The performance tests for the color tracking algorithms was performed using a Raspberry Pi NoIR Camera, fixing the resolution at 640x480 pixels and finding the colour white (light emitted using infra-red LEDs).
 
-|        | Color 1 | Color 2 | Color 2 | Color 2 | Color 2 | Color 2 |
+|        | Color 1 | Color 2 | Color 3 | Color 4 | Color 5 | Color 6 |
 | -------|:-------:| -------:| -------:| -------:| -------:| -------:|
 | RPI 2  |  0.20s  |  0.21s  |  0.165s |  0.15s  |  0.15s  |  0.15s  |
 | RPI 3  |  0.17s  |  0.17s  |  0.129s |  0.124s |  0.12s  |  0.12s  |
+
+![rpi-opencv-tests](https://altax.net/images/rpi-opencv-tests.jpg "Performance tests for colour finding")
 
 ## What do you need?
 
