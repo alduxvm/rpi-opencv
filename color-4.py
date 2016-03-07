@@ -3,13 +3,13 @@
 """color-4.py: Color detection using openCV."""
 
 """
-Performance: 
+Performance @ 640x480 resolution: 
 
 RMBP -> 0.005s each detection or 20hz 
 
-RPI2 -> 0.11s each detection or 9hz 
+RPI 2 -> 0.15s each detection or 6.6hz 
 
-RPI B+ -> 0.26 each detection or 3.84hz 
+RPI 3 -> 0.124s each detection or 8.06hz 
 
 """
 

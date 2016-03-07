@@ -3,18 +3,18 @@
 """color-1.py: Color tracking using openCV. """
 
 """ 
-Performance: 
+Performance @ 640x480 resolution: 
 
 RMBP -> 0.005s each detection or 200hz 
 
-RPI 2 -> 0.1 each detection or 10hz 
+RPI 2 -> 0.2s each detection or 5hz 
 
-RPI B+ -> 0.36 each detection or 2.7hz 
+RPI 3 -> 0.17s each detection or 5.88hz 
 
 """
 
 __author__ = "Aldo Vargas"
-__copyright__ = "Copyright 2015 Aldux.net"
+__copyright__ = "Copyright 2016 Altax.net"
 
 __license__ = "GPL"
 __version__ = "1"
@@ -55,11 +55,11 @@ class ColorTracker:
             thresholded_img =  cv.CreateImage(cv.GetSize(hsv_img), 8, 1)
 
             # White
-            #sensitivity = 10
-            #cv.InRangeS(hsv_img, (0, 0, 255-sensitivity), (255, sensitivity, 255), thresholded_img)
+            sensitivity = 10
+            cv.InRangeS(hsv_img, (0, 0, 255-sensitivity), (255, sensitivity, 255), thresholded_img)
 
             # Red
-            cv.InRangeS(hsv_img, (0, 150, 0), (5, 255, 255), thresholded_img)
+            #cv.InRangeS(hsv_img, (0, 150, 0), (5, 255, 255), thresholded_img)
 
             # Blue
             #cv.InRangeS(hsv_img, (100, 50, 50), (140, 255, 255), thresholded_img)

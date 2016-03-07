@@ -3,18 +3,18 @@
 """color-3.py: Color detection using openCV."""
 
 """ 
-Performance: 
+Performance @ 640x480 resolution: 
 
 RMBP -> 0.03s each detection or 33hz 
 
-RPI2 -> 0.125s each detection or 8hz 
+RPI 2 -> 0.165s each detection or 6.06hz 
 
-RPI B+ -> 0.3 each detection or 3.33hz 
+RPI 3 -> 0.129s each detection or 7.75hz 
 
 """
 
 __author__ = "Aldo Vargas"
-__copyright__ = "Copyright 2015 Aldux.net"
+__copyright__ = "Copyright 2016 Altax.net"
 
 __license__ = "GPL"
 __version__ = "1"

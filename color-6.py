@@ -2,7 +2,16 @@
 
 """color-5.py: Similar to color-4 but inside a class."""
 
-""" Performance: on video (mp4 sample) and running in a RMBP -> 0.02s each detection or 50hz """
+"""
+Performance @ 640x480 resolution: 
+
+RMBP -> 0.005s each detection or 20hz 
+
+RPI 2 -> 0.15s each detection or 6.66hz 
+
+RPI 3 -> 0.12s each detection or 8.33hz 
+
+"""
 
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"
@@ -33,8 +42,7 @@ class vision:
 	"""
 	def __init__(self, targetcolor, show):
 		self.cam = cv2.VideoCapture(0)
-		# If camera size gets reduced, the time of each find increases... Weird.
-		self.position = {'color':targetcolor,'found':False,'x':0,'y':0,'elapsed':0.0}
+		self.position = {'color':targetcolor,'found':False,'x':0,'y':0,'rate':0.0}
 		self.cam.set(3,640)
 		self.cam.set(4,480)
 		self.targetcolor = targetcolor
@@ -53,7 +61,7 @@ class vision:
 				elif self.targetcolor is 'green':
 					color=cv2.inRange(hsv,np.array([40,50,50]),np.array([80,255,255]))
 				else: # white is default
-					sensitivity = 10
+					sensitivity = 30
 					color = cv2.inRange(hsv,np.array([0,0,255-sensitivity]),np.array([255,sensitivity,255]))
 				image_mask=color
 				element = cv2.getStructuringElement(cv2.MORPH_RECT,(3,3))
@@ -76,7 +84,7 @@ class vision:
 					self.position['found']=True
 					self.position['x']=x
 					self.position['y']=y
-					self.position['elapsed']=round(t2-t1,2)
+					self.position['rate']=round(1.0/(t2-t1),1)
 					print self.position
 				else:
 					self.position['found']=False

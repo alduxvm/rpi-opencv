@@ -10,9 +10,18 @@ Test scripts for using openCV with python, all made to running on a raspberry pi
 
 [![Drone Color tracking](http://img.youtube.com/vi/xlQw_mnJtNQ/0.jpg)](http://www.youtube.com/watch?v=xlQw_mnJtNQ)
 
+## Performance:
+
+The performance tests for the color tracking algorithms was performed using a Raspberry Pi NoIR Camera, fixing the resolution at 640x480 pixels and finding the colour white (light emitted using infra-red LEDs).
+
+|        | Color 1 | Color 2 | Color 2 | Color 2 | Color 2 | Color 2 |
+| -------|:-------:| -------:| -------:| -------:| -------:| -------:|
+| RPI 2  |  0.20s  |  0.21s  |  0.165s |  0.15s  |  0.15s  |  0.15s  |
+| RPI 3  |  0.17s  |  0.17s  |  0.129s |  0.124s |  0.12s  |  0.12s  |
+
 ## What do you need?
 
-* Raspberry pi (I'm using a rpi B+, rpi2)
+* Raspberry pi (I'm using a RPI 2 and RPI 3)
 * Camera module (I'm using the NOIR camera)
 * USB webcam (I'm using a logitech pro 9000)
 * wifi dongle for the rpi or ethernet (duhhh)

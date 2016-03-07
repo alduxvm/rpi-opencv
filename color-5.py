@@ -2,7 +2,16 @@
 
 """color-5.py: Similar to color-4 but inside a class."""
 
-""" Performance: on video (mp4 sample) and running in a RMBP -> 0.02s each detection or 50hz """
+"""
+Performance @ 640x480 resolution: 
+
+RMBP -> 0.005s each detection or 20hz 
+
+RPI 2 -> 0.15s each detection or 6.66hz 
+
+RPI 3 -> 0.12s each detection or 8.33hz 
+
+"""
 
 __author__ = "Aldo Vargas"
 __copyright__ = "Copyright 2015 Aldux.net"
@@ -35,8 +44,7 @@ class vision:
 	def __init__(self, targetcolor, show):
 		self.cam = cv2.VideoCapture(0)
 		#self.cam = cv2.VideoCapture('roomba.mp4')
-		# If camera size gets reduced, the time of each find increases... Weird.
-		self.position = {'color':targetcolor,'found':False,'x':0,'y':0,'elapsed':0.0,'serX':0.0,'serY':0.0}
+		self.position = {'color':targetcolor,'found':False,'x':0,'y':0,'rate':0.0,'serX':0.0,'serY':0.0}
 		self.resX=640
 		self.resY=480
 		self.cam.set(3,self.resX)
@@ -81,7 +89,7 @@ class vision:
 				self.position['y']=y+(h/2)
 				self.position['serX'] = (self.position['x']-(self.resX/2.0))*(50.0/(self.resX/2))
 				self.position['serY'] = (self.position['y']-(self.resY/2.0))*(50.0/(self.resX/2))
-				self.position['elapsed']=round(t2-t1,2)
+				self.position['rate']=round(1.0/(t2-t1),1)
 				print self.position
 			else:
 				self.position['found']=False
