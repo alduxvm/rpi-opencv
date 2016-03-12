@@ -23,7 +23,7 @@ __email__ = "alduxvm@gmail.com"
 __status__ = "Development"
 
 
-import numpy as numpy
+import numpy as np
 import cv2
 import time, threading
 
