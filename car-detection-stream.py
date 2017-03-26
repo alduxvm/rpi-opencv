@@ -16,6 +16,7 @@ import cv2
 from urllib2 import urlopen
 import imutils
 
+# Stream from public cameras (http://www.webcamxp.com/publicipcams.aspx) - test first using VLC
 stream = urlopen('http://96.10.1.168/mjpg/video.mjpg') # mjpg stream camera from an Axis network camera in a random place
 bytes = bytes()
 
