@@ -3,7 +3,7 @@
 """object-tracking.py: Object detection using openCV."""
 
 __author__ = "Aldo Vargas"
-__copyright__ = "Copyright 2015 Aldux.net"
+__copyright__ = "Copyright 2015 Altax.net"
 
 __license__ = "GPL"
 __version__ = "1"
@@ -15,16 +15,16 @@ import numpy as np
 import cv2
 
 def run_main():
-    cap = cv2.VideoCapture(0)
-    cap.set(3,320)
-    cap.set(4,240)
+    cap = cv2.VideoCapture('crash-480.mp4')
+    #cap.set(3,320)
+    #cap.set(4,240)
 
     # Read the first frame of the video
     ret, frame = cap.read()
 
     # Set the ROI (Region of Interest). Actually, this is a
     # rectangle of the building that we're tracking
-    c,r,w,h = 160,120,30,30
+    c,r,w,h = 427,240,50,50
     track_window = (c,r,w,h)
 
     # Create mask and normalized histogram

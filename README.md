@@ -2,7 +2,7 @@
 
 # rpi-opencv
 
-Test scripts for using openCV with python, all made to running on a raspberry pi, but will work on Mac's and Linux. 
+Test scripts for using openCV with python, all scripts designed to work on a raspberry pi, but will work on Mac's and Linux. 
 
 ![rpi-opencv-python-noir](https://altax.net/images/face-rpi-opencv.jpg "rpi face detection opencv python with noir camera")
 

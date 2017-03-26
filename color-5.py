@@ -14,7 +14,7 @@ RPI 3 -> 0.12s each detection or 8.33hz
 """
 
 __author__ = "Aldo Vargas"
-__copyright__ = "Copyright 2015 Aldux.net"
+__copyright__ = "Copyright 2015 Altax.net"
 
 __license__ = "GPL"
 __version__ = "1"
@@ -42,8 +42,8 @@ class vision:
 	- False -> if you dont want to see camera output
 	"""
 	def __init__(self, targetcolor, show):
-		self.cam = cv2.VideoCapture(0)
-		#self.cam = cv2.VideoCapture('roomba.mp4')
+		#self.cam = cv2.VideoCapture(0)
+		self.cam = cv2.VideoCapture('roomba.mp4')
 		self.position = {'color':targetcolor,'found':False,'x':0,'y':0,'rate':0.0,'serX':0.0,'serY':0.0}
 		self.resX=640
 		self.resY=480
@@ -112,11 +112,11 @@ def aldo():
 try:
 	#test = vision('red',True)
 	#test.findcolor()
-	#aldo()
-	testThread = threading.Thread(target=test.findcolor)
-	testThread.daemon=True
-	testThread.start()
-	testThread.join()
+	aldo()
+	#testThread = threading.Thread(target=test.findcolor)
+	#testThread.daemon=True
+	#testThread.start()
+	#testThread.join()
 	while True:
 		print test.position
 		if cv2.waitKey(1) == 27:

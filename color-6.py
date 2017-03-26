@@ -14,7 +14,7 @@ RPI 3 -> 0.12s each detection or 8.33hz
 """
 
 __author__ = "Aldo Vargas"
-__copyright__ = "Copyright 2015 Aldux.net"
+__copyright__ = "Copyright 2015 Altax.net"
 
 __license__ = "GPL"
 __version__ = "1"
@@ -98,7 +98,7 @@ class vision:
 			print "Error in findcolor: "+str(error)
 
 def aldo():
-	test = vision('red',True)
+	test = vision('blue',True)
 	test.findcolor()
 
 if __name__ == "__main__":

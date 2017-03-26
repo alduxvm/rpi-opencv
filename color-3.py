@@ -30,8 +30,8 @@ import multiprocessing
 
 class ColorTracker:
     def __init__(self, targetcolor, show, width, height):
-        self.capture = cv2.VideoCapture(0)
-        #self.capture = cv2.VideoCapture('crash-480.mp4')
+        #self.capture = cv2.VideoCapture(0)
+        self.capture = cv2.VideoCapture('slung2.mp4')
         self.tracker = {'color':targetcolor,'found':False,'x':0.0,'y':0.0,'serx':0.0,'sery':0.0,'elapsed':0.0}
         self.targetcolor = targetcolor
         self.show = show
@@ -59,6 +59,9 @@ class ColorTracker:
             # Red
             elif self.targetcolor is 'red':
                 color = cv2.inRange(img,np.array([0,150,0]),np.array([5,255,255]))
+            # Black
+            elif self.targetcolor is 'black':
+                color = cv2.inRange(img,np.array([0,0,0]),np.array([100,100,100]))
             # White
             else:
                 sensitivity = 10
@@ -106,7 +109,7 @@ class ColorTracker:
                 self.tracker['found']=False
                 print self.tracker
 
-color_tracker = ColorTracker('white',False,640,480)
+color_tracker = ColorTracker('black',True,640,480)
 color_tracker.findColor()
 jobs = []
 

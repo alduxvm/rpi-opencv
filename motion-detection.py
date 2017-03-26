@@ -3,7 +3,7 @@
 """motion-detection.py: Motion detection using openCV"""
 
 __author__ = "Aldo Vargas"
-__copyright__ = "Copyright 2015 Aldux.net"
+__copyright__ = "Copyright 2015 Altax.net"
 __downloaded__ = "https://github.com/RobinDavid/Motion-detection-OpenCV/blob/master/MotionDetectorContours.py"
 
 __license__ = "GPL"

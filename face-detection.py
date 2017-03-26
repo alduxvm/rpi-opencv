@@ -3,7 +3,7 @@
 """face-detection.py: Face detection using openCV."""
 
 __author__ = "Aldo Vargas"
-__copyright__ = "Copyright 2015 Aldux.net"
+__copyright__ = "Copyright 2015 Altax.net"
 
 __license__ = "GPL"
 __version__ = "1"
@@ -53,14 +53,14 @@ def detect_and_draw(img, cascade):
 
 if __name__ == '__main__':
 
-    cascade = cv.Load("face.xml")
+    cascade = cv.Load("haars/face.xml")
 
     capture = cv.CreateCameraCapture(0)
 
     cv.NamedWindow("Face detection", 1)
 
-    width = 320 #leave None for auto-detection
-    height = 240 #leave None for auto-detection
+    width = 640 #leave None for auto-detection
+    height = 480 #leave None for auto-detection
 
     if width is None:
     	width = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH))

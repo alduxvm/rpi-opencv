@@ -14,7 +14,7 @@ RPI 3 -> 0.124s each detection or 8.06hz
 """
 
 __author__ = "Aldo Vargas"
-__copyright__ = "Copyright 2015 Aldux.net"
+__copyright__ = "Copyright 2015 Altax.net"
 
 __license__ = "GPL"
 __version__ = "1"
@@ -28,8 +28,8 @@ import cv2
 import time
 
 
-cam = cv2.VideoCapture(0)
-#cam = cv2.VideoCapture('roomba.mp4')
+#cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture('slung-load.mp4')
 cam.set(3,640)
 cam.set(4,480)
 
@@ -41,6 +41,9 @@ while ( True ):
         # Blue
         #color = cv2.inRange(hsv,np.array([100,50,50]),np.array([140,255,255]))
 
+        # Black
+        color = cv2.inRange(hsv,np.array([0,0,0]),np.array([150,150,150]))
+
         # Green
         #color = cv2.inRange(hsv,np.array([40,50,50]),np.array([80,255,255]))
 
@@ -48,8 +51,8 @@ while ( True ):
         #color = cv2.inRange(hsv,np.array([0,150,0]),np.array([5,255,255]))
 
         # White
-        sensitivity = 10
-        color = cv2.inRange(hsv,np.array([0,0,255-sensitivity]),np.array([255,sensitivity,255]))
+        #sensitivity = 10
+        #color = cv2.inRange(hsv,np.array([0,0,255-sensitivity]),np.array([255,sensitivity,255]))
 
         # Change to select color
         image_mask=color
@@ -60,7 +63,7 @@ while ( True ):
         image_mask = cv2.erode(image_mask,element)
 
         contours, hierarchy = cv2.findContours(image_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        maximumArea = 0
+        maximumArea = 10
         bestContour = None
         for contour in contours:
             currentArea = cv2.contourArea(contour)
