@@ -18,9 +18,11 @@ import numpy as np
 
 # Source from http://212.170.22.153:8080/view/viewer_index.shtml?id=412 - test first in VLC
 stream = urlopen('http://212.170.22.153:8080/mjpg/video.mjpg') # mjpg stream camera from an Axis network camera in Spain
+#stream = urlopen('http://10.0.0.1:60152/liveview.JPG?%211234%21http%2dget%3a%2a%3aimage%2fjpeg%3a%2a%21%21%21%21%21') # qx10 
 bytes = bytes()
 
 # Change to the haar as desired from what you want to test or use
+#classifier = cv2.CascadeClassifier('haars/face.xml')
 classifier = cv2.CascadeClassifier('haars/fullbody.xml')
 #classifier = cv2.CascadeClassifier('haars/lowerbody.xml')
 #classifier = cv2.CascadeClassifier('haars/upperbody.xml')
